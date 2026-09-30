@@ -1,4 +1,7 @@
 # 手填原型输入示例（运营李四 / metrics / v1.1 字段位）
+# 注意：custom 的 key 必须与 profile 字段 key 一致（new_users / cac / channel_mix），
+#       structured 字段 channel_mix 用 dict 结构，渲染时自动转为项目符号列表。
+profile: metrics
 week: "2026-W39"
 name: 李四
 role: 运营
@@ -8,6 +11,9 @@ standard:
   blockers: "设计资源排期冲突，素材晚了 2 天"
   support_needed: "需要设计组周三前排完三版素材"
 custom:
-  新增: "8,200（环比 +12%）"
-  CAC: "36.5 元（环比 -8%）"
-  渠道占比: "信息流 45% / 搜索 30% / 私域 25%"
+  new_users: "8,200（环比 +12%）"
+  cac: "36.5 元（环比 -8%）"
+  channel_mix:
+    信息流: "45%"
+    搜索: "30%"
+    私域: "25%"

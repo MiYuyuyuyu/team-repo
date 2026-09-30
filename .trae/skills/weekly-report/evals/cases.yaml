@@ -1,9 +1,10 @@
-# weekly-report 评测用例 —— v1.0 快照（6 条，无 w03）
-#
-# 用途：段5 C5-3 录屏时，`git checkout v1.0` 展示"李四发现没有字段位"之前的基线状态。
-#       把本文件覆盖到 evals/cases.yaml 再跑，应得 6/6 PASS；切回 v1.1 的 cases.yaml 得 7/7。
+# weekly-report 评测用例（v1.2）
 # 跑法：python scripts/run_evals.py
+#
+# 迭代原则：老用例 w01–w07 必须保持全绿（没改坏老行为），新用例通过才许合并。
+# v1.2 新增：w08（structured 渲染）、w09（必填校验）、w10（横向合并）。
 cases:
+  # —— v1.0 基线 ——
   - id: w01_standard_four_fields
     desc: 标准版恰好包含四个必填字段
     type: standard_fields
@@ -13,6 +14,13 @@ cases:
     type: profile_has_fields
     profile: metrics
     fields: [dau, retention]
+
+  # —— v1.1 新增字段位（活跃 cases.yaml 此前遗漏，v1.2 补齐） ——
+  - id: w03_metrics_v11_ops
+    desc: metrics v1.1 新增 new_users/cac/channel_mix 字段位
+    type: profile_has_fields
+    profile: metrics
+    fields: [new_users, cac, channel_mix]
 
   - id: w04_risk_profile
     desc: risk profile 有 risks/early_warnings
@@ -34,3 +42,56 @@ cases:
   - id: w07_template_render
     desc: 模板能被标准版四字段完整渲染（无残留占位符）
     type: template_render
+
+  # —— v1.2 新增：兑现已声明但未生效的设计承诺 ——
+  - id: w08_structured_risks_table
+    desc: risk.risks 为 list[dict] 时渲染为 Markdown 表格
+    type: structured_render
+    profile: risk
+    field: risks
+    value:
+      - level: 中
+        desc: 聚合任务耗时未验证
+        mitigation: 先跑 explain + 小流量试跑
+    expect_contains: ["| level |", "| desc |", "| 中 |", "| 聚合任务耗时未验证 |"]
+
+  - id: w08b_structured_channel_mix_list
+    desc: metrics.channel_mix 为 dict 时渲染为项目符号列表
+    type: structured_render
+    profile: metrics
+    field: channel_mix
+    value:
+      信息流: "45%"
+      搜索: "30%"
+      私域: "25%"
+    expect_contains: ["信息流：45%", "搜索：30%", "私域：25%"]
+
+  - id: w09_required_missing
+    desc: 标准版必填字段缺失时校验失败并指出字段名
+    type: required_validation
+    profile: metrics
+    input:
+      standard:
+        this_week_done: 已完成
+        # next_week_plan 故意缺失
+        blockers: 无
+        support_needed: 无
+    expect_errors_contain: ["下周计划", "next_week_plan"]
+
+  - id: w10_merge_standard
+    desc: 多人标准版字段横向合并，按字段分组、每人一行
+    type: merge_standard
+    reports:
+      - name: 张三
+        standard:
+          this_week_done: A
+          next_week_plan: B
+          blockers: C
+          support_needed: D
+      - name: 李四
+        standard:
+          this_week_done: E
+          next_week_plan: F
+          blockers: G
+          support_needed: H
+    expect_contains: ["## 本周完成", "**张三**：A", "**李四**：E", "## 需要支持", "**李四**：H"]
