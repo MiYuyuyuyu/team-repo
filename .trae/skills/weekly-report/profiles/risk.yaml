@@ -1,0 +1,9 @@
+# profile: 风险预警（后端张三）
+profile: risk
+name: 风险预警
+fields:
+  - key: risks
+    label: 风险列表
+    structured: true        # [{level, desc, mitigation}]
+  - key: early_warnings
+    label: 预警项

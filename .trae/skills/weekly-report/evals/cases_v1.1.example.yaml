@@ -1,0 +1,39 @@
+# weekly-report 评测用例（结构性校验）
+# 跑法：python scripts/run_evals.py
+cases:
+  - id: w01_standard_four_fields
+    desc: 标准版恰好包含四个必填字段
+    type: standard_fields
+
+  - id: w02_metrics_v1_compat
+    desc: metrics 保留 v1.0 的 dau/retention（没改坏老行为）
+    type: profile_has_fields
+    profile: metrics
+    fields: [dau, retention]
+
+  - id: w03_metrics_v11_ops
+    desc: metrics v1.1 新增 new_users/cac/channel_mix 字段位
+    type: profile_has_fields
+    profile: metrics
+    fields: [new_users, cac, channel_mix]
+
+  - id: w04_risk_profile
+    desc: risk profile 有 risks/early_warnings
+    type: profile_has_fields
+    profile: risk
+    fields: [risks, early_warnings]
+
+  - id: w05_cross_team_profile
+    desc: cross_team profile 三个字段位齐全
+    type: profile_has_fields
+    profile: cross_team
+    fields: [collab_updates, pending_dependencies, cross_requests]
+
+  - id: w06_negative_unknown_profile   # 负向
+    desc: 请求不存在的 profile 必须报错，不许静默编一个
+    type: negative_unknown_profile
+    profile: not_exist
+
+  - id: w07_template_render
+    desc: 模板能被标准版四字段完整渲染（无残留占位符）
+    type: template_render

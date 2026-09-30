@@ -1,0 +1,10 @@
+# profile: 跨部门协作（项目BD王五）
+profile: cross_team
+name: 跨部门协作
+fields:
+  - key: collab_updates
+    label: 协作进展
+  - key: pending_dependencies
+    label: 待对接依赖
+  - key: cross_requests
+    label: 跨部门请求

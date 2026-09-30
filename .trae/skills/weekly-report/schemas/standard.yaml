@@ -1,0 +1,15 @@
+# 标准版 —— 人人一致的四字段（真共性进标准版）
+version: "1.0"
+fields:
+  - key: this_week_done
+    label: 本周完成
+    required: true
+  - key: next_week_plan
+    label: 下周计划
+    required: true
+  - key: blockers
+    label: 阻塞
+    required: true
+  - key: support_needed
+    label: 需要支持
+    required: true

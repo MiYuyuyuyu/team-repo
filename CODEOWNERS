@@ -1,0 +1,6 @@
+# CODEOWNERS：路径模式 + 负责评审的账号
+# 命中路径的改动会自动请求下列账号评审；至少一人批准后方可合并。
+# 每行格式：<路径模式> <owner1> <owner2>
+
+.trae/skills/boss-reply/ @MiYuyuyuyu @RiceShowerererer
+.trae/skills/weekly-report/ @MiYuyuyuyu @RiceShowerererer

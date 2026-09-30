@@ -1,0 +1,13 @@
+# 演示用：metrics profile 的 v1.0 状态（只有产品的两个字段位）
+# 录屏 C5-3 用 git tag v1.0 切出这个版本，展示李四"没有字段位"的真实场景。
+# 这不是"换个数填"能解决的——new_users / cac / channel_mix 在 v1.0 里根本没有位置。
+profile: metrics
+name: 数据指标
+version: "1.0"
+fields:
+  - key: dau
+    label: DAU
+    owner_roles: [产品]
+  - key: retention
+    label: 留存
+    owner_roles: [产品]

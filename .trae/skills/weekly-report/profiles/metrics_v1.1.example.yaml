@@ -1,0 +1,25 @@
+# profile: 数据指标（产品 / 运营共用，填的指标位不同）
+# 当前文件 = v1.1 最终状态
+profile: metrics
+name: 数据指标
+fields:
+  - key: dau
+    label: DAU
+    owner_roles: [产品, 运营]
+  - key: retention
+    label: 留存
+    owner_roles: [产品]
+  # ↓↓↓ 以下三个字段位是 v1.1 由运营李四在 feature/ops-metrics 分支新增 ↓↓↓
+  - key: new_users
+    label: 新增
+    owner_roles: [运营]
+    added_in: v1.1
+  - key: cac
+    label: CAC
+    owner_roles: [运营]
+    added_in: v1.1
+  - key: channel_mix
+    label: 渠道占比
+    owner_roles: [运营]
+    structured: true        # 结构化数据：{渠道: 占比}，不是单个数值
+    added_in: v1.1

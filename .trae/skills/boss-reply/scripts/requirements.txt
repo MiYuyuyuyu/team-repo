@@ -1,0 +1,2 @@
+# 锁版本：换机安装 pip install -r scripts/requirements.txt
+PyYAML==6.0.2

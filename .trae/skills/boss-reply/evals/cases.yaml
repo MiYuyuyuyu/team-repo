@@ -1,0 +1,30 @@
+# 回复老板模拟器 —— 评测用例（结构性校验，不做字符串全等）
+# 跑法：python scripts/run_evals.py
+# 规则：老用例全绿才许合并。改技能先保证这些不过红。
+
+cases:
+  - id: c01_config_load
+    desc: config.yaml 能读到非空 boss_style
+    type: config_nonempty
+    key: boss_style
+
+  - id: c02_profile_relative
+    desc: boss_profile.md 通过相对技能目录的路径能加载
+    type: file_relative
+    path: boss_profile.md
+
+  - id: c03_prompt_contains_style
+    desc: 组装出的提示词包含配置里的风格关键词
+    type: prompt_contains
+    fixture: "方案什么时候能给我？"
+    contains: "结果导向"
+
+  - id: c04_prompt_contains_message
+    desc: 提示词原样包含老板原话
+    type: prompt_contains
+    fixture: "明天下午之前给我"
+    contains: "明天下午之前给我"
+
+  - id: c05_negative_without_style   # 负向用例
+    desc: 缺少 boss_style 时必须拒答提示，不许瞎编
+    type: negative_missing_style
