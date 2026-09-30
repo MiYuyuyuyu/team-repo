@@ -1,0 +1,14 @@
+# BD王五 / cross_team
+profile: cross_team
+week: "2026-W39"
+name: 王五
+role: 项目BD
+standard:
+  this_week_done: "完成两家合作伙伴方案宣讲，一家进入合同条款阶段"
+  next_week_plan: "推进合同内审，安排技术对接会"
+  blockers: "对方要求 SSO 对接，我方排期未确认"
+  support_needed: "请张三评估 SSO 对接工作量并给排期"
+custom:
+  collab_updates: "A 客户条款谈判中；B 客户等技术方案"
+  pending_dependencies: "法务合同模板、研发 SSO 评估"
+  cross_requests: "法务周三前反馈修改条款"

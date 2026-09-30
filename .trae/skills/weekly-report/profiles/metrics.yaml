@@ -1,13 +1,25 @@
-# 演示用：metrics profile 的 v1.0 状态（只有产品的两个字段位）
-# 录屏 C5-3 用 git tag v1.0 切出这个版本，展示李四"没有字段位"的真实场景。
-# 这不是"换个数填"能解决的——new_users / cac / channel_mix 在 v1.0 里根本没有位置。
+# profile: 数据指标（产品 / 运营共用，填的指标位不同）
+# 当前文件 = v1.1 最终状态（v1.2 未改动字段，只让 structured: true 真正生效）
 profile: metrics
 name: 数据指标
-version: "1.0"
 fields:
   - key: dau
     label: DAU
-    owner_roles: [产品]
+    owner_roles: [产品, 运营]
   - key: retention
     label: 留存
     owner_roles: [产品]
+  # ↓↓↓ 以下三个字段位是 v1.1 由运营李四在 feature/ops-metrics 分支新增 ↓↓↓
+  - key: new_users
+    label: 新增
+    owner_roles: [运营]
+    added_in: v1.1
+  - key: cac
+    label: CAC
+    owner_roles: [运营]
+    added_in: v1.1
+  - key: channel_mix
+    label: 渠道占比
+    owner_roles: [运营]
+    structured: true        # 结构化数据：{渠道: 占比}，渲染为项目符号列表
+    added_in: v1.1

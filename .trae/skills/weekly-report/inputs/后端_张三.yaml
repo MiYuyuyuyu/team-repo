@@ -1,0 +1,16 @@
+# 后端张三 / risk（risks 为 list[dict]，渲染为 Markdown 表格）
+profile: risk
+week: "2026-W39"
+name: 张三
+role: 后端
+standard:
+  this_week_done: "完成周报服务接口改造，评测流水线接入 CI"
+  next_week_plan: "上线指标聚合任务，灰度 10%"
+  blockers: "预发环境数据库版本落后，部分 SQL 无法验证"
+  support_needed: "请运维周四前升级预发库"
+custom:
+  risks:
+    - level: 中
+      desc: 聚合任务在大分区表上耗时未验证，可能拖慢凌晨任务
+      mitigation: 先跑全量 explain + 小流量试跑
+  early_warnings: "消息队列积压两次，均在 20 分钟内自恢复，持续观察"
